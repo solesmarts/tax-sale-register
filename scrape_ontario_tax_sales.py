@@ -95,11 +95,22 @@ def parse_notice_page(html: str) -> list[dict]:
     full_text = content.get_text("\n", strip=True)
 
     # Every notice heading is "The Corporation of the <Town/Township/City/
-    # Municipality/County> of <Name>" — required wording under O. Reg 181/03.
+    # Municipality/County> of <Name>" — required wording under O. Reg
+    # 181/03. The same phrase also appears a second time near the bottom
+    # of each notice, in the clerk's signature block (e.g. "Darlene Peever,
+    # Tax Collector, The Corporation of the Town of Kirkland Lake..."), so
+    # matching the phrase alone over-splits each notice in two. A real
+    # heading is always immediately followed by "Take Notice that tenders
+    # are invited" — the signature-block mention isn't — so use that as
+    # the disambiguator.
     heading_re = re.compile(
         r"The Corporation of the (?:Town|Township|City|Municipality|County|Village)s? of [^\n]+"
     )
-    heading_matches = list(heading_re.finditer(full_text))
+    heading_matches = [
+        m
+        for m in heading_re.finditer(full_text)
+        if re.search(r"Take\s*Notice", full_text[m.end(): m.end() + 120], re.IGNORECASE)
+    ]
 
     print(f"Found {len(heading_matches)} municipality headings", file=sys.stderr)
     if not heading_matches:
