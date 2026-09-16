@@ -82,28 +82,42 @@ def parse_amount(text: str) -> float:
 
 def parse_notice_page(html: str) -> list[dict]:
     """Split the tax-arrears page into per-municipality notices, then
-    per-property records within each notice."""
+    per-property records within each notice.
+
+    This works on the page's flattened text rather than its tag structure.
+    Government CMS markup (permalink icons nested inside headings, wrapper
+    divs, etc.) varies and breaks tag-based matching in ways that are hard
+    to predict in advance; matching on the text every notice is legally
+    required to contain is far more durable.
+    """
     soup = BeautifulSoup(html, "html.parser")
     content = soup.find("main") or soup
+    full_text = content.get_text("\n", strip=True)
 
-    # Municipality notices are separated by <h2> headings naming the
-    # corporation, e.g. "The Corporation of the Town of Kirkland Lake".
-    headings = content.find_all(["h2"], string=re.compile(r"^The Corporation of"))
+    # Every notice heading is "The Corporation of the <Town/Township/City/
+    # Municipality/County> of <Name>" — required wording under O. Reg 181/03.
+    heading_re = re.compile(
+        r"The Corporation of the (?:Town|Township|City|Municipality|County|Village)s? of [^\n]+"
+    )
+    heading_matches = list(heading_re.finditer(full_text))
+
+    print(f"Found {len(heading_matches)} municipality headings", file=sys.stderr)
+    if not heading_matches:
+        # Surface a snippet so a failed run is diagnosable from the Actions
+        # log instead of just silently producing an empty file.
+        print("First 500 chars of fetched page text:", file=sys.stderr)
+        print(full_text[:500], file=sys.stderr)
+        return []
 
     records = []
-    for h in headings:
-        municipality = h.get_text(strip=True)
-
-        # Collect the sibling text between this heading and the next one.
-        block_parts = []
-        for sib in h.find_next_siblings():
-            if sib.name == "h2":
-                break
-            block_parts.append(sib.get_text(" ", strip=True))
-        block_text = "\n".join(block_parts)
+    for i, m in enumerate(heading_matches):
+        municipality = m.group(0).strip()
+        block_start = m.end()
+        block_end = heading_matches[i + 1].start() if i + 1 < len(heading_matches) else len(full_text)
+        block_text = full_text[block_start:block_end]
 
         closing_match = re.search(
-            r"received until\s+3:00\s*p\.m\.?\s*local time on\s+([A-Za-z]+ \d{1,2},?\s*\d{4})",
+            r"3:00\s*p\.?m\.?\s*local time on\s+([A-Za-z]+ \d{1,2},?\s*\d{4})",
             block_text,
         )
         closing_date = None
@@ -118,27 +132,37 @@ def parse_notice_page(html: str) -> list[dict]:
         gazette_ref_match = re.search(r"\((\d+-P\d+)\)", block_text)
         gazette_ref = gazette_ref_match.group(1) if gazette_ref_match else None
 
-        # Each property starts with "Roll No." and ends at its own
+        # Each property is introduced by "Roll No." somewhere before its own
         # "Minimum Tender Amount: $X" line.
-        property_chunks = re.split(r"(?=Roll No\.? ?\(Number\)?)", block_text)
+        property_chunks = re.split(r"(?=Roll No)", block_text)
         for chunk in property_chunks:
-            if "Minimum Tender Amount" not in chunk:
+            tender_match = re.search(r"Minimum Tender Amount:?\s*(" + MONEY_RE + r")", chunk)
+            if not tender_match:
                 continue
 
-            roll_match = re.search(r"Roll No\.?\s*\(Number\)?\s*([\d\s\-]+?);", chunk)
-            addr_match = re.search(r";\s*([^;]+?,\s*[A-Za-z\- ]+?);\s*PINs?", chunk)
-            pin_match = re.search(r"PINs?\s*\(Property identification numbers?\)\s*([\d\-A-Za-z]+)", chunk)
-            assessed_match = re.search(r"assessed value of the land is\s*(" + MONEY_RE + r")", chunk)
-            tender_match = re.search(r"Minimum Tender Amount:\s*(" + MONEY_RE + r")", chunk)
-            file_match = re.search(r"File No\.?\s*\(Number\)?\s*([\w\-]+)", chunk)
-
-            if not (roll_match and tender_match):
-                continue
+            # Roll number: the digit/space/dash run right after "Roll No.",
+            # cut off at the first non-numeric separator (semicolon, en
+            # dash, hyphen-word boundary, or newline) rather than requiring
+            # one specific terminator.
+            roll_match = re.search(
+                r"Roll No\.?\s*\(?Number\)?:?\s*([0-9][0-9 \-]*[0-9])", chunk
+            )
+            pin_match = re.search(r"\b(\d{5}[\-\u2013]\d{4})\b", chunk)
+            assessed_match = re.search(
+                r"assessed value of the land is\s*(" + MONEY_RE + r")", chunk
+            )
+            file_match = re.search(r"File No\.?\s*\(?Number\)?:?\s*([\w\-]+)", chunk)
+            # Address: best-effort — the first "<number/street>, <place>"
+            # fragment before the PIN. Left as None if it can't be isolated
+            # confidently rather than guessing.
+            addr_match = re.search(
+                r";\s*([A-Za-z0-9][^;\n]{3,60}?,\s*[A-Za-z][^;\n]{2,40}?)\s*;", chunk
+            )
 
             records.append(
                 {
                     "municipality": municipality,
-                    "roll_no": roll_match.group(1).strip(),
+                    "roll_no": roll_match.group(1).strip() if roll_match else None,
                     "address": addr_match.group(1).strip() if addr_match else None,
                     "pin": pin_match.group(1).strip() if pin_match else None,
                     "assessed_value": parse_amount(assessed_match.group(1)) if assessed_match else None,
@@ -169,11 +193,11 @@ def main():
 
     out_path = Path(args.out)
     existing = json.loads(out_path.read_text()) if out_path.exists() else []
-    existing_keys = {(r["gazette_ref"], r["roll_no"]) for r in existing}
+    existing_keys = {(r["gazette_ref"], r["roll_no"] or r["min_tender"]) for r in existing}
 
     added = 0
     for rec in new_records:
-        key = (rec["gazette_ref"], rec["roll_no"])
+        key = (rec["gazette_ref"], rec["roll_no"] or rec["min_tender"])
         if key not in existing_keys:
             existing.append(rec)
             existing_keys.add(key)
