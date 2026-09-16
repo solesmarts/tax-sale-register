@@ -82,5 +82,77 @@
     "closing_date": "2026-10-21",
     "gazette_ref": "159-P293",
     "scraped_at": "2026-09-16T00:58:21.047605+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Town of Kirkland Lake",
+    "roll_no": null,
+    "address": null,
+    "pin": "61404-0101",
+    "assessed_value": 83000.0,
+    "min_tender": 9509.92,
+    "file_no": null,
+    "closing_date": "2026-10-07",
+    "gazette_ref": "159-P287",
+    "scraped_at": "2026-09-16T01:11:14.243958+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Black River-Matheson",
+    "roll_no": null,
+    "address": null,
+    "pin": "65380-0284",
+    "assessed_value": 31000.0,
+    "min_tender": 10825.13,
+    "file_no": null,
+    "closing_date": "2026-10-08",
+    "gazette_ref": "159-P288",
+    "scraped_at": "2026-09-16T01:11:14.244109+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Muskoka Lakes",
+    "roll_no": null,
+    "address": null,
+    "pin": "48136-0350",
+    "assessed_value": 25500.0,
+    "min_tender": 8680.44,
+    "file_no": null,
+    "closing_date": "2026-10-01",
+    "gazette_ref": "159-P289",
+    "scraped_at": "2026-09-16T01:11:14.244226+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Town of Rainy River",
+    "roll_no": null,
+    "address": null,
+    "pin": "56056-0063",
+    "assessed_value": 5800.0,
+    "min_tender": 54676.92,
+    "file_no": null,
+    "closing_date": "2026-10-07",
+    "gazette_ref": "159-P290",
+    "scraped_at": "2026-09-16T01:11:14.244333+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Sables-Spanish Rivers",
+    "roll_no": null,
+    "address": null,
+    "pin": "73423-0431",
+    "assessed_value": 74000.0,
+    "min_tender": 22713.34,
+    "file_no": null,
+    "closing_date": "2026-10-07",
+    "gazette_ref": "159-P291",
+    "scraped_at": "2026-09-16T01:11:14.244460+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Town of Thessalon",
+    "roll_no": null,
+    "address": null,
+    "pin": "31446-1033",
+    "assessed_value": 58000.0,
+    "min_tender": 19261.56,
+    "file_no": null,
+    "closing_date": "2026-10-07",
+    "gazette_ref": "159-P292",
+    "scraped_at": "2026-09-16T01:11:14.244551+00:00"
   }
 ]
