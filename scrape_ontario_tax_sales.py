@@ -216,7 +216,17 @@ def main():
     print(f"Parsed {len(new_records)} property records", file=sys.stderr)
 
     out_path = Path(args.out)
-    existing = json.loads(out_path.read_text()) if out_path.exists() else []
+    existing = []
+    if out_path.exists() and out_path.read_text().strip():
+        try:
+            existing = json.loads(out_path.read_text())
+        except json.JSONDecodeError:
+            print(
+                f"WARNING: {out_path} exists but isn't valid JSON (empty or corrupted) — "
+                "starting fresh instead of crashing.",
+                file=sys.stderr,
+            )
+            existing = []
     existing_keys = {(r["gazette_ref"], r["roll_no"] or r["min_tender"]) for r in existing}
 
     added = 0
