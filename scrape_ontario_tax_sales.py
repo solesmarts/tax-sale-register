@@ -145,14 +145,18 @@ def parse_notice_page(html: str) -> list[dict]:
 
         print(
             f"  [{municipality[:45]}] block length {len(block_text)} chars, "
-            f"'Roll No' appears {block_text.count('Roll No')}x, "
+            f"'Roll No' appears {len(re.findall(r'Roll' + chr(92) + r's+No', block_text))}x, "
             f"'Minimum Tender' appears {block_text.count('Minimum Tender')}x",
             file=sys.stderr,
         )
 
         # Each property is introduced by "Roll No." somewhere before its own
-        # "Minimum Tender Amount: $X" line.
-        property_chunks = re.split(r"(?=Roll No)", block_text)
+        # "Minimum Tender Amount: $X" line. Government pages often mark up
+        # "Roll No." with an accessibility abbreviation tag, which splits
+        # "Roll" and "No." into separate text nodes once flattened — so
+        # match across whitespace (including a forced newline) between the
+        # two words rather than requiring them adjacent.
+        property_chunks = re.split(r"(?=Roll\s+No)", block_text)
         for chunk in property_chunks:
             tender_match = re.search(r"Minimum Tender Amount:?\s*(" + MONEY_RE + r")", chunk)
             if not tender_match:
@@ -161,9 +165,11 @@ def parse_notice_page(html: str) -> list[dict]:
             # Roll number: the digit/space/dash run right after "Roll No.",
             # cut off at the first non-numeric separator (semicolon, en
             # dash, hyphen-word boundary, or newline) rather than requiring
-            # one specific terminator.
+            # one specific terminator. Tolerate whitespace between "Roll"
+            # and "No." for the same abbreviation-tag-splitting reason as
+            # the chunk split above.
             roll_match = re.search(
-                r"Roll No\.?\s*\(?Number\)?:?\s*([0-9][0-9 \-]*[0-9])", chunk
+                r"Roll\s+No\.?\s*\(?Number\)?:?\s*([0-9][0-9 \-]*[0-9])", chunk
             )
             pin_match = re.search(r"\b(\d{5}[\-\u2013]\d{4})\b", chunk)
             assessed_match = re.search(
