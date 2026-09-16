@@ -143,6 +143,13 @@ def parse_notice_page(html: str) -> list[dict]:
         gazette_ref_match = re.search(r"\((\d+-P\d+)\)", block_text)
         gazette_ref = gazette_ref_match.group(1) if gazette_ref_match else None
 
+        print(
+            f"  [{municipality[:45]}] block length {len(block_text)} chars, "
+            f"'Roll No' appears {block_text.count('Roll No')}x, "
+            f"'Minimum Tender' appears {block_text.count('Minimum Tender')}x",
+            file=sys.stderr,
+        )
+
         # Each property is introduced by "Roll No." somewhere before its own
         # "Minimum Tender Amount: $X" line.
         property_chunks = re.split(r"(?=Roll No)", block_text)
