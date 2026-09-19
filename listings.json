@@ -274,5 +274,89 @@
     "closing_date": "2026-10-21",
     "gazette_ref": "159-P293",
     "scraped_at": "2026-09-16T21:28:22.884403+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Mulmur",
+    "roll_no": null,
+    "address": null,
+    "pin": "34109-0217",
+    "assessed_value": null,
+    "min_tender": 7863.98,
+    "file_no": null,
+    "closing_date": "2026-10-21",
+    "gazette_ref": "159-P319",
+    "scraped_at": "2026-09-19T10:13:06.817021+00:00"
+  },
+  {
+    "municipality": "The Corporation of the City of Brantford",
+    "roll_no": null,
+    "address": null,
+    "pin": "32196-0278",
+    "assessed_value": 3464000.0,
+    "min_tender": 530834.58,
+    "file_no": null,
+    "closing_date": null,
+    "gazette_ref": "159-P320",
+    "scraped_at": "2026-09-19T10:13:06.817175+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Ignace",
+    "roll_no": null,
+    "address": null,
+    "pin": "42103-1803",
+    "assessed_value": 10100.0,
+    "min_tender": 29307.79,
+    "file_no": null,
+    "closing_date": "2026-10-14",
+    "gazette_ref": "159-P321",
+    "scraped_at": "2026-09-19T10:13:06.817369+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Ignace",
+    "roll_no": null,
+    "address": null,
+    "pin": "42103-0947",
+    "assessed_value": 28500.0,
+    "min_tender": 43127.51,
+    "file_no": null,
+    "closing_date": "2026-10-14",
+    "gazette_ref": "159-P321",
+    "scraped_at": "2026-09-19T10:13:06.817387+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Ignace",
+    "roll_no": null,
+    "address": null,
+    "pin": "42103-1360",
+    "assessed_value": 5500.0,
+    "min_tender": 17518.55,
+    "file_no": null,
+    "closing_date": "2026-10-14",
+    "gazette_ref": "159-P321",
+    "scraped_at": "2026-09-19T10:13:06.817407+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Ignace",
+    "roll_no": null,
+    "address": null,
+    "pin": "42103-1097",
+    "assessed_value": 11900.0,
+    "min_tender": 42149.28,
+    "file_no": null,
+    "closing_date": "2026-10-14",
+    "gazette_ref": "159-P321",
+    "scraped_at": "2026-09-19T10:13:06.817425+00:00"
+  },
+  {
+    "municipality": "The Corporation of the Township of Ignace",
+    "roll_no": null,
+    "address": null,
+    "pin": "42103-1096",
+    "assessed_value": 11800.0,
+    "min_tender": 42042.56,
+    "file_no": null,
+    "closing_date": "2026-10-14",
+    "gazette_ref": "159-P321",
+    "scraped_at": "2026-09-19T10:13:06.817473+00:00"
   }
 ]
