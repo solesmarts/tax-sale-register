@@ -5,7 +5,12 @@ on:
     # Every Saturday at 10:00 UTC — a few hours after that week's
     # Gazette issue is typically published.
     - cron: '0 10 * * 6'
-  workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      weeks:
+        description: 'How many past weekly issues to scan (1 = current issue only, ~13 = 3 months)'
+        required: false
+        default: '1'
 
 permissions:
   contents: write
@@ -26,7 +31,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run scraper
-        run: python scrape_ontario_tax_sales.py --out listings.json
+        run: python scrape_ontario_tax_sales.py --out listings.json --weeks "${{ github.event.inputs.weeks || '1' }}"
 
       - name: Commit updated listings.json
         run: |
