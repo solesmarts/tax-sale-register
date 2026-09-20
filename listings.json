@@ -285,7 +285,10 @@
     "file_no": null,
     "closing_date": "2026-10-21",
     "gazette_ref": "159-P319",
-    "scraped_at": "2026-09-19T10:13:06.817021+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004383+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the City of Brantford",
@@ -297,7 +300,10 @@
     "file_no": null,
     "closing_date": null,
     "gazette_ref": "159-P320",
-    "scraped_at": "2026-09-19T10:13:06.817175+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004569+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the Township of Ignace",
@@ -309,7 +315,10 @@
     "file_no": null,
     "closing_date": "2026-10-14",
     "gazette_ref": "159-P321",
-    "scraped_at": "2026-09-19T10:13:06.817369+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004682+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the Township of Ignace",
@@ -321,7 +330,10 @@
     "file_no": null,
     "closing_date": "2026-10-14",
     "gazette_ref": "159-P321",
-    "scraped_at": "2026-09-19T10:13:06.817387+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004697+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the Township of Ignace",
@@ -333,7 +345,10 @@
     "file_no": null,
     "closing_date": "2026-10-14",
     "gazette_ref": "159-P321",
-    "scraped_at": "2026-09-19T10:13:06.817407+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004718+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the Township of Ignace",
@@ -345,7 +360,10 @@
     "file_no": null,
     "closing_date": "2026-10-14",
     "gazette_ref": "159-P321",
-    "scraped_at": "2026-09-19T10:13:06.817425+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004731+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   },
   {
     "municipality": "The Corporation of the Township of Ignace",
@@ -357,6 +375,9 @@
     "file_no": null,
     "closing_date": "2026-10-14",
     "gazette_ref": "159-P321",
-    "scraped_at": "2026-09-19T10:13:06.817473+00:00"
+    "scraped_at": "2026-09-20T16:57:19.004757+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-38-september-19-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 38
   }
 ]
