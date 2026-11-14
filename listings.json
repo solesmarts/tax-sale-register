@@ -2113,5 +2113,50 @@
     "sale_type": "tender",
     "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-45-november-7-2026/sale-land-tax-arrears-public-tender",
     "gazette_issue": 45
+  },
+  {
+    "municipality": "The Corporation of the Township of Addington Highlands",
+    "roll_no": null,
+    "address": "except forfeited mining rights, if any",
+    "pin": "45045-0174",
+    "assessed_value": 23000.0,
+    "min_tender": 6268.67,
+    "file_no": null,
+    "closing_date": null,
+    "gazette_ref": "159-P392",
+    "scraped_at": "2026-11-14T16:27:25.083254+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-46-november-14-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 46
+  },
+  {
+    "municipality": "The Corporation of the Township of Addington Highlands",
+    "roll_no": null,
+    "address": null,
+    "pin": "45035-0118",
+    "assessed_value": 65000.0,
+    "min_tender": 9952.84,
+    "file_no": null,
+    "closing_date": null,
+    "gazette_ref": "159-P392",
+    "scraped_at": "2026-11-14T16:27:25.083286+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-46-november-14-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 46
+  },
+  {
+    "municipality": "The Corporation of the Township of Addington Highlands",
+    "roll_no": null,
+    "address": null,
+    "pin": "45035-0063",
+    "assessed_value": 62000.0,
+    "min_tender": 9453.25,
+    "file_no": null,
+    "closing_date": null,
+    "gazette_ref": "159-P392",
+    "scraped_at": "2026-11-14T16:27:25.083316+00:00",
+    "sale_type": "tender",
+    "source_url": "https://www.ontario.ca/document/ontario-gazette-volume-159-issue-46-november-14-2026/sale-land-tax-arrears-public-tender",
+    "gazette_issue": 46
   }
 ]
